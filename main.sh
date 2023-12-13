@@ -22,6 +22,7 @@ METASPLOIT_PATH="/usr/share/metasploit-framework"  # Replace with your Metasploi
 # Function to check if Metasploit is installed
 check_metasploit() {
   if [ -d "$METASPLOIT_PATH" ]; then
+    echo -e "${BLUEBold} check_metasploit...${NC}"
     echo -e "${BLUE}Metasploit is installed.${NC}"
   else
     echo "Metasploit is not installed. Please install it and try again."
@@ -56,10 +57,10 @@ check_metasploit
 while true; do
   echo -e "${BLUEBold}Choose an option:\n${RED}"
   echo -e "1. Scan network"
-  echo -e "2. Show available exploits"
-  echo -e "3. Show available payloads"
-  echo -e "4. Show available auxiliary"
-  echo -e "5. Show available encoders"
+  echo -e "2. Search available exploits"
+  echo -e "3. Search available payloads"
+  echo -e "4. Search available auxiliary"
+  echo -e "5. Search available encoders"
   echo -e "90. Clear"
   echo -e "99. Exit"
 
@@ -70,20 +71,21 @@ while true; do
       scan_network
       ;;
     2)
-      echo -e "${BLUE}Showing available exploits...${BLUEBold}"
-      msfconsole -x "search type:exploit"
+      echo -e "${BLUE}Searching available exploits...${BLUEBold}"
+      
+      gnome-terminal -- bash -c "echo 'Loading... Search Exploit' && ./LodingBar.py && Tool/exploits.sh; bash"
       ;;
     3)
-      echo -e "${BLUE}Showing available payloads...${BLUEBold}"
-      msfconsole -x "show payloads"
+      echo -e "${BLUE}Searching available payloads...${BLUEBold}"
+      gnome-terminal -- bash -c "echo 'Loading... Search Exploit' && ./LodingBar.py && Tool/payloads.sh; bash"
       ;;
     4)
-      echo -e "${BLUE}Showing available auxiliary...${BLUEBold}"
-      msfconsole -x "search type:auxiliary"
+      echo -e "${BLUE}Searching available auxiliary...${BLUEBold}"
+      gnome-terminal -- bash -c "echo 'Loading... Search auxiliary' && msfconsole -x 'search type:auxiliary'"
       ;;
     5)
-      echo -e "${BLUE}Showing available encoders...${BLUEBold}"
-      msfconsole -x "show encoders"
+      echo -e "${BLUE}Searching available encoders...${BLUEBold}"
+      gnome-terminal -- bash -c "echo 'Loading... Search encoders' && msfconsole -x 'Search encoders'"
       ;;
     90)
       clear
